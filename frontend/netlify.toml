@@ -1,0 +1,17 @@
+[build]
+  # O comando para instalar dependências e construir a aplicação.
+  # O `cd frontend &&` garante que o comando seja executado dentro da pasta correta.
+  command = "npm install && cd frontend && npm install && npm run build"
+  
+  # O diretório de build que o Netlify irá publicar (gerado pelo Next.js).
+  publish = "frontend/.next"
+  
+  # A pasta base do projeto onde o Netlify deve procurar pelos arquivos.
+  base = "frontend/"
+
+# Configuração para variáveis de ambiente
+[context.production.environment]
+  # A URL do backend será o endereço de produção do seu backend.
+  # Você deverá configurar essa variável na interface do Netlify
+  # depois de fazer o deploy do seu backend.
+  # NEXT_PUBLIC_API_BASE_URL = ""

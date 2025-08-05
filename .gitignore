@@ -1,0 +1,38 @@
+# Arquivos de Node.js e Gerenciadores de Pacotes
+node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Arquivos de build e temporários
+build
+dist
+.nyc_output
+coverage
+
+# Arquivos de IDEs
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Variáveis de Ambiente (CRÍTICO: Nunca comite arquivos .env)
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# ====================
+# Configurações do Frontend (Next.js)
+# ====================
+frontend/node_modules
+frontend/.next/
+frontend/out/
+
+# ====================
+# Configurações do Backend
+# ====================
+backend/node_modules
+backend/dist/
+backend/src/**/*.js
+backend/src/**/*.js.map
