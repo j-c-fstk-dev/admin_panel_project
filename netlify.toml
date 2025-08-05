@@ -1,8 +1,16 @@
 [build]
-  # Garante que as dependências sejam instaladas antes de rodar o build
-  command = "npm install && npm run build"
+  # O caminho do diretório base, onde o Netlify deve procurar o código-fonte da aplicação.
   base = "frontend/"
+
+  # O comando de build a ser executado dentro da pasta base.
+  # Ele garante que as dependências sejam instaladas e a aplicação seja construída.
+  command = "npm install && npm run build"
+
+  # O diretório de publicação, que deve ser a pasta `.next` dentro do diretório base.
   publish = "frontend/.next"
 
+# Configuração para variáveis de ambiente
 [context.production.environment]
+  # A URL do backend que você obteve do Railway.
+  # Esta variável será injetada no build do Netlify.
   NEXT_PUBLIC_API_BASE_URL = "https://adminpanelproject-production-3ceb.up.railway.app/api"
