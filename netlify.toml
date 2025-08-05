@@ -1,19 +1,8 @@
 [build]
-  # O caminho do diretório base, onde o Netlify deve procurar o código-fonte da aplicação.
-  base = "frontend/"
-
-  # O comando de build a ser executado dentro da pasta base.
+  # Garante que as dependências sejam instaladas antes de rodar o build
   command = "npm install && npm run build"
-
-  # O diretório de publicação, que deve ser a pasta `.next` dentro do diretório base.
+  base = "frontend/"
   publish = "frontend/.next"
 
-# Configuração específica para o plugin Next.js
-# [build.environment]
-#   NETLIFY_NEXTJS_ENABLE_PLUGIN = "true"
-
-# Define o contexto de produção
-[context.production]
-  # A URL do backend. Pode ser configurada aqui ou na interface do Netlify.
-  [context.production.environment]
-    NEXT_PUBLIC_API_BASE_URL = "https://adminpanelproject-production-3ceb.up.railway.app/api"
+[context.production.environment]
+  NEXT_PUBLIC_API_BASE_URL = "https://adminpanelproject-production-3ceb.up.railway.app/api"
