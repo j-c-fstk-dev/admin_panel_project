@@ -1,8 +1,7 @@
 [build]
-  # Netlify já executa este comando dentro da pasta base ("frontend/")
-  command = "npm install && npm run build"
-  publish = "frontend/.next"
   base = "frontend/"
+  command = "npm run build"
+  publish = "frontend/.next"
 
 [context.production.environment]
   NEXT_PUBLIC_API_BASE_URL = "https://adminpanelproject-production-3ceb.up.railway.app/api"
