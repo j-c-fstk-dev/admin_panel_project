@@ -1,0 +1,11 @@
+# railway.toml
+
+# Define a configuração para o serviço do backend
+[[railway.service]]
+name = "admin_panel" # Nome do seu serviço de backend
+root = "backend/" # A pasta onde o Railway deve procurar a aplicação
+
+# Opcional: Você pode definir o ambiente de forma específica se necessário
+# [railway.service.environment]
+# NODE_ENV = "production"
+# PORT = 3001
