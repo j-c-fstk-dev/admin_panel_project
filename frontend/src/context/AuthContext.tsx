@@ -1,91 +1,299 @@
-"use client";
-
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
-import { useRouter } from "next/navigation"; // CORRIGIDO: Importe o useRouter do 'next/navigation'
-import { auth, User } from "../services/api"; // Importe o serviço de autenticação
-
-interface AuthContextType {
-  user: User | null;
-  login: (email: string, password: string) => Promise<boolean>;
-  logout: () => void;
-  isAuthenticated: boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export function AuthProvider({ children }: { ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const router = useRouter(); // Inicialize o useRouter
-
-  useEffect(() => {
-    // Tenta carregar o usuário e o token do localStorage ao iniciar
-    const storedUser = localStorage.getItem("user");
-    const storedToken = localStorage.getItem("authToken");
-
-    if (storedUser && storedToken) {
-      try {
-        setUser(JSON.parse(storedUser));
-        setIsAuthenticated(true);
-      } catch (e) {
-        console.error("Failed to parse user from localStorage", e);
-        logout(); // Limpa dados inválidos
-      }
-    }
-  }, []);
-
-  const login = async (email: string, password: string): Promise<boolean> => {
-    try {
-      const response = await auth.login(email, password);
-      const { token } = response; // Supondo que a API retorna { token: '...' }
-
-      // Neste ponto, você pode querer buscar os dados reais do usuário logado
-      // Para simplificar, vamos usar um objeto de usuário mock ou os dados do login
-      const loggedInUser: User = {
-        id: 0, // ID temporário, idealmente viria do backend
-        name: "Administrador", // Nome temporário
-        email: email,
-        status: "Ativo",
-        created_at: new Date().toISOString(),
-      };
-
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(loggedInUser));
-      setUser(loggedInUser);
-      setIsAuthenticated(true);
-      router.push("/dashboard"); // Redireciona para o dashboard após o login
-      return true;
-    } catch (error) {
-      console.error("Login failed:", error);
-      return false;
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
-    setUser(null);
-    setIsAuthenticated(false);
-    router.push("/login"); // Redireciona para a página de login
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-}
+[{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2307",
+	"severity": 8,
+	"message": "Cannot find module 'react' or its corresponding type declarations.",
+	"source": "ts",
+	"startLineNumber": 3,
+	"startColumn": 33,
+	"endLineNumber": 3,
+	"endColumn": 40,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2307",
+	"severity": 8,
+	"message": "Cannot find module 'react-icons/fi' or its corresponding type declarations.",
+	"source": "ts",
+	"startLineNumber": 4,
+	"startColumn": 28,
+	"endLineNumber": 4,
+	"endColumn": 44,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 38,
+	"startColumn": 5,
+	"endLineNumber": 38,
+	"endColumn": 101,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 39,
+	"startColumn": 7,
+	"endLineNumber": 39,
+	"endColumn": 40,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2741",
+	"severity": 8,
+	"message": "Property 'children' is missing in type '{ className: string; }' but required in type 'CardProps'.",
+	"source": "ts",
+	"startLineNumber": 40,
+	"startColumn": 10,
+	"endLineNumber": 40,
+	"endColumn": 14,
+	"relatedInformation": [
+		{
+			"startLineNumber": 4,
+			"startColumn": 3,
+			"endLineNumber": 4,
+			"endColumn": 11,
+			"message": "'children' is declared here.",
+			"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/components/Card.tsx"
+		}
+	],
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 42,
+	"startColumn": 11,
+	"endLineNumber": 42,
+	"endColumn": 66,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 43,
+	"startColumn": 13,
+	"endLineNumber": 43,
+	"endColumn": 58,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 44,
+	"startColumn": 15,
+	"endLineNumber": 44,
+	"endColumn": 97,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 46,
+	"startColumn": 15,
+	"endLineNumber": 46,
+	"endColumn": 21,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 47,
+	"startColumn": 15,
+	"endLineNumber": 47,
+	"endColumn": 83,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 49,
+	"startColumn": 15,
+	"endLineNumber": 49,
+	"endColumn": 20,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 50,
+	"startColumn": 13,
+	"endLineNumber": 50,
+	"endColumn": 19,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 51,
+	"startColumn": 11,
+	"endLineNumber": 51,
+	"endColumn": 17,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 53,
+	"startColumn": 11,
+	"endLineNumber": 53,
+	"endColumn": 99,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 55,
+	"startColumn": 11,
+	"endLineNumber": 55,
+	"endColumn": 16,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 57,
+	"startColumn": 11,
+	"endLineNumber": 57,
+	"endColumn": 63,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2322",
+	"severity": 8,
+	"message": "Type '{ label: string; type: string; placeholder: string; value: any; onChange: (e: any) => any; required: true; }' is not assignable to type 'InputProps'.\n  Property 'type' does not exist on type 'InputProps'.",
+	"source": "ts",
+	"startLineNumber": 60,
+	"startColumn": 15,
+	"endLineNumber": 60,
+	"endColumn": 19,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7006",
+	"severity": 8,
+	"message": "Parameter 'e' implicitly has an 'any' type.",
+	"source": "ts",
+	"startLineNumber": 63,
+	"startColumn": 26,
+	"endLineNumber": 63,
+	"endColumn": 27,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2322",
+	"severity": 8,
+	"message": "Type '{ label: string; type: string; placeholder: string; value: any; onChange: (e: any) => any; required: true; error: any; }' is not assignable to type 'InputProps'.\n  Property 'type' does not exist on type 'InputProps'.",
+	"source": "ts",
+	"startLineNumber": 71,
+	"startColumn": 15,
+	"endLineNumber": 71,
+	"endColumn": 19,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7006",
+	"severity": 8,
+	"message": "Parameter 'e' implicitly has an 'any' type.",
+	"source": "ts",
+	"startLineNumber": 74,
+	"startColumn": 26,
+	"endLineNumber": 74,
+	"endColumn": 27,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "2322",
+	"severity": 8,
+	"message": "Type '{ type: string; className: string; disabled: any; }' is not assignable to type 'ButtonProps'.\n  Property 'type' does not exist on type 'ButtonProps'.",
+	"source": "ts",
+	"startLineNumber": 81,
+	"startColumn": 21,
+	"endLineNumber": 81,
+	"endColumn": 25,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 84,
+	"startColumn": 11,
+	"endLineNumber": 84,
+	"endColumn": 18,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 86,
+	"startColumn": 7,
+	"endLineNumber": 86,
+	"endColumn": 13,
+	"origin": "extHost1"
+},{
+	"resource": "/mnt/debian-docs/jorge/Documentos/projects/projects kali/projects/admin_panel_project/frontend/src/pages/LoginPage.tsx",
+	"owner": "typescript",
+	"code": "7026",
+	"severity": 8,
+	"message": "JSX element implicitly has type 'any' because no interface 'JSX.IntrinsicElements' exists.",
+	"source": "ts",
+	"startLineNumber": 87,
+	"startColumn": 5,
+	"endLineNumber": 87,
+	"endColumn": 11,
+	"origin": "extHost1"
+}]
